@@ -1,35 +1,22 @@
-import cookielib
-import urllib2
 import mechanize
-import facebook
 
-# Browser
-br = mechanize.Browser()
+url = 'https://m.facebook.com'
+loggedin_title = 'Facebook' # isto vai servir para confirmarmos que estamos loggedin, vendo o titulo da pagina para onde fomos redirecionados 
+username = 'USERNAME'
+password = 'PASSWORD'
 
-# To enable cookies
-cookiejar = cookielib.LWPCookieJar()
-br.set_cookiejar( cookiejar )
+browser = mechanize.Browser()
+browser.set_handle_robots(False)
+browser.addheaders = [('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.6)')]
 
-# Browser settings
-br.set_handle_equiv( True )
-br.set_handle_gzip( True )
-br.set_handle_redirect( True )
-br.set_handle_referer( True )
-br.set_handle_robots( False )
+browser.open(url)
+browser.select_form(nr=0)
+browser.form["email"] = username
+browser.form["pass"] = password
+browser.submit()
 
-
-br.set_handle_refresh( mechanize._http.HTTPRefreshProcessor(), max_time = 1 )
-
-br.addheaders = [ ( 'User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1' ) ]
-
-# To authenticate
-br.open("https://www.facebook.com/")
-br.select_form(nr = 0)        #first form is a login form
-
-br[ "email" ] = "your email/phone no"
-br[ "pass" ] = "your password"
-res = br.submit()
-
-br.geturl()
-
-token=''
+if browser.title() == loggedin_title:
+    print '[+] SUCCESS'
+    print 'Username: {}\nPassword: {}'.format(username, password)
+else:
+    print '[-] LOGIN FAILED
