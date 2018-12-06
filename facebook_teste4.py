@@ -1,16 +1,26 @@
 import facebook
-import requests
-import urllib2
-#pegar o oken com o acesso a leads
-token = 'EAAQhV3JPZCU8BAA7xhnIHb0psJyrMhFy6LgveVxACsKapUS4bIiMNlHptrrN6YqnrBvIzuJS8S4KbfqGK5eGnuZCRx07iIxdnpSUpYF0muLNVC6eRWwIacVtSkTFl31TDovNDptA4o6M83eMHIaklfXBBfmEuS1FfAX4XeOlxU5h1iulcYk1PXdT0DGPwvvPFlK2hQpwZDZD'
+import os
+import calendar
+
+#o token com acesso a leads
+token = 'EAAQhV3JPZCU8BANqyrGkNLWYcphgmccs1xzfMipAODSZAitVRjZAfEiVbtexyyZCqkvMq9t3QcpJZBQdA9ChkHcO0zGnM2ZCZC3vqP0tAylNdevdwgIuF0IrFZCZCRLz7lcjhPx1PbQtOW7pYAHFPeeiQ8eO87iCVp8jZCzqhBbTO64jlbpKSJpoiDZCUXdTAedhEnzGogwKlq9MAZDZD'
 graph = facebook.GraphAPI(token)
 args = {'fields' : 'leadgen_forms'}
-#substituir talvez por get_object(s)
+#pegando o objeto dicionario referente as leads
 friends = graph.get_object("me", **args)
-print friends['leadgen_forms']['data'][0]['leadgen_export_csv_url']
 
-response = urllib2.urlopen(friends['leadgen_forms']['data'][0]['leadgen_export_csv_url'])
-html = response.read()
+url = friends['leadgen_forms']['data'][0]['leadgen_export_csv_url']
 
-with open('.', 'w') as f:  
-    f.write(html) 
+cal1 = calendar.timegm((2018, 11, 8, 24, 0, 0))
+cal2 = calendar.timegm((2018, 11, 11, 24, 0, 0))
+
+url = url[:(url.find("&")+1)] +  "type=form&amp&from_date=" + str(cal1) + "&amp&to_date=" + str(cal2)
+
+print url
+
+os.system("chrome \"" + url + "\"")
+#fp = csv.writer(open("algo.csv", "w"))
+
+#for line in response.content:
+#	print line
+#	fp.writerow(line)
