@@ -79,6 +79,7 @@ while global_counter < len(token):
 	time.sleep(2)
 
 	dropdiret = "C:\\Users\\renderxp\\Desktop"
+	dropbr = '\\'
 
 	#apagar as leads vazias
 	for nome in os.listdir(diret):
@@ -100,5 +101,11 @@ while global_counter < len(token):
 		if nome.find(".xls") != -1:
 			nome = diret + nome
 			shutil.move(nome,dropdiret)
+
+	for nome in os.listdir(dropdiret):
+		if nome.find("Brasil") != -1:
+			nome = dropdiret + nome
+			shutil.move(nome, dropbr)
+
 
 	global_counter = global_counter + 1
