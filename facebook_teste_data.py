@@ -4,6 +4,8 @@ import calendar
 import datetime
 import time
 from calendar import monthrange
+import shutil
+
 
 #referencia dos dias em que vai pegar os leads
 while True:
@@ -74,7 +76,9 @@ while global_counter < len(token):
 
 		counter = counter + 1
 
-	time.sleep(1)
+	time.sleep(2)
+
+	dropdiret = "C:\\Users\\renderxp\\Desktop"
 
 	#apagar as leads vazias
 	for nome in os.listdir(diret):
@@ -91,11 +95,10 @@ while global_counter < len(token):
 			new_name = nome[:nome.find(".csv")] + ".xls"
 			os.rename(nome, new_name)
 
+	#renomear os arquivos para xls
+	for nome in os.listdir(diret):
+		if nome.find(".xls") != -1:
+			nome = diret + nome
+			shutil.move(nome,dropdiret)
+
 	global_counter = global_counter + 1
-
-#fp = csv.writer(open("algo.csv", "w"))
-
-#for line in response.content:
-#	print line
-#	fp.writerow(line)
-
