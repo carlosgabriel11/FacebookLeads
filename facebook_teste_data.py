@@ -62,7 +62,7 @@ while global_counter < len(token):
 	graph = facebook.GraphAPI(token[global_counter])
 
 	#pegando o objeto dicionario referente as leads
-	friends = graph.get_object("me", **args)
+	friends = graph.get_object("me/leadgen_forms?pretty=0&limit=300")
 
 	#baixar os arquivos
 	counter = 0
@@ -86,7 +86,7 @@ while global_counter < len(token):
 		if nome.find(".csv") != -1:
 			new_diret = diret + nome
 
-			if os.path.getsize(new_diret) < 350:
+			if os.path.getsize(new_diret) < 550:
 				os.remove(new_diret)
 
 	#renomear os arquivos para xls
