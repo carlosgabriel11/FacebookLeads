@@ -15,3 +15,5 @@ https://medium.com/@Jenananthan/how-to-create-non-expiry-facebook-page-token-650
 7) No GET... escreve me/accounts
 
 8) Vai ser gerado os tokens vitalícios de cada página a qual você gerencia
+
+EAAfW092AUWoBAKYj7IycbAZBJAnPkSTYp2xhh5ZBDDRFJuZAWpmlV9dTEEbMmei6ZBMs5evmhvMG9pXt8hiQZCVwUFRltnm2kEs9ZCT5L4yIy9kNMH8WluOAwDdufT6sjZADrmPN80B4ypVutSzPCLsRnENafdsWUcbhB4vkiZCZBBQZDZD
