@@ -62,7 +62,7 @@ while global_counter < len(token):
 	graph = facebook.GraphAPI(token[global_counter])
 
 	#pegando o objeto dicionario referente as leads
-	friends = graph.get_object("me/leadgen_forms?pretty=0&limit=300")
+	friends = graph.get_object("me", **args)
 
 	#baixar os arquivos
 	counter = 0
@@ -89,6 +89,23 @@ while global_counter < len(token):
 			if os.path.getsize(new_diret) < 550:
 				os.remove(new_diret)
 
+	for nome in os.listdir(diret):
+		if nome.find("Sao Paulo") != -1:
+			new_diret = diret + nome
+			os.remove(new_diret)
+			continue
+
+		if nome.find("SAO") != -1:
+			new_diret = diret + nome
+			os.remove(new_diret)
+			continue
+
+		if nome.find("SP") != -1:
+			new_diret = diret + nome
+			os.remove(new_diret)
+			continue
+
+
 	#renomear os arquivos para xls
 	for nome in os.listdir(diret):
 		if nome.find(".csv") != -1:
@@ -97,15 +114,15 @@ while global_counter < len(token):
 			os.rename(nome, new_name)
 
 	#renomear os arquivos para xls
-	for nome in os.listdir(diret):
-		if nome.find(".xls") != -1:
-			nome = diret + nome
-			shutil.move(nome,dropdiret)
-
-	for nome in os.listdir(dropdiret):
-		if nome.find("Brasil") != -1:
-			nome = dropdiret + nome
-			shutil.move(nome, dropbr)
+	#for nome in os.listdir(diret):
+		#if nome.find(".xls") != -1:
+		#	nome = diret + nome
+		#	shutil.move(nome,dropdiret)
+#
+	#for nome in os.listdir(dropdiret):
+		#if nome.find("Brasil") != -1:
+		#	nome = dropdiret + nome
+		#	shutil.move(nome, dropbr)
 
 
 	global_counter = global_counter + 1
