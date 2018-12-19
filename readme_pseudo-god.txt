@@ -7,7 +7,7 @@ Obs: Provavelmente ele será instalado no local C:\Python27\
 
 Passo 2 - Colocar o python na Path:
 2.1 - Procurar o local de instalação do python dentro do C:
-2.2 - Dentro do local de instalação do python, no local onde fica a localização do diretório, clica-se com o botão direito do mouseem python 27 e clica em "Copiar endereço como texto"
+2.2 - Dentro do local de instalação do python, no local onde fica a localização do diretório, clica-se com o botão direito do mouse em python 27 e clica em "Copiar endereço como texto"
 2.3 - No explorador de arquivos, do lado esquerdo, procurar pelo computador (my computer)
 2.4 - Clicar sobre o ícone do computador com o botão direito do mouse e procurar por propriedades
 2.7 - Na nova janela que abrir, clicar em "configurações avançadas do sistema"
