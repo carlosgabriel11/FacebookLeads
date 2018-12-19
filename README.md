@@ -9,3 +9,5 @@ https://developers.facebook.com/docs/messenger-platform/send-messages/#standard_
 https://stackoverflow.com/questions/22723152/getting-limited-number-of-posts-using-facebook-graph-api
 
 https://manychat.com/
+
+https://www.socialmediaexaminer.com/how-to-get-started-with-messenger-bots-dana-tran/
