@@ -96,14 +96,24 @@ while counter_campanha < total_campanha:
 							quantidade_respondido = quantidade_respondido + 1
 							graph.put_comment(comment_id, message = "Inscreva-se clicando no link abaixo da imagem, aguarde contato telefônico e aproveite.")
 
+
+					elif((comentario.find("ONDE") is not -1) or (comentario.find(u"ENDEREÇO") is not -1)):
+						check = graph.get_object(comment_id + "?fields=comments")
+
+
+						if not checarComentado(check):
+							quantidade_respondido = quantidade_respondido + 1
+							graph.put_comment(comment_id, message = "São mais de 370 unidades em todo Brasil. Inscreva-se clicando no link abaixo da imagem, aguarde contato telefônico e aproveite.")
+					
 				counter_anuncios = counter_anuncios + 1
 
 			except KeyError:
 				counter_anuncios = counter_anuncios + 1
 				continue
-			except:
-				print com
-				time.sleep(500)
+			except Exception as e:
+				print e
+				#print com
+				time.sleep(60)
 				pass
 
 		counter_conjuntoAnuncios = counter_conjuntoAnuncios + 1
