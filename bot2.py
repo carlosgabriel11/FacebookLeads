@@ -67,6 +67,12 @@ for counter in range(sh.nrows):
 	if counter == 0:
 		continue
 
+	valid = sh.cell_value(counter, 33)
+	valid = valid.upper()
+
+	if valid.find("WHATSAPP") is -1:
+		continue
+
 	name = sh.cell_value(counter, 1)
 	name = name.split(' ')[0]
 	name = name.lower()
