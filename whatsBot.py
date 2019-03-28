@@ -13,7 +13,6 @@ import urllib
 
 phone_column = 24
 nome_column = 3
-sexo_column = 18
 line_write1 = 0
 line_write2 = 0
 
@@ -56,12 +55,6 @@ url_phone  = 'https://api.whatsapp.com/send?phone='
 #the name of the workbook
 nome_planilha = 'Leads.xlsx'
 
-#mensagem para enviar se a pessoa for do sexo feminino
-messageFem = u'Tentei contactá-la via telefone mas sem sucesso. Escrevo em nome do Instituto Assistencial dos Servidores do Distrito Federal (IGDF) e meu nome é Marlon. Trabalhamos com um Plano de Saúde exclusivo para Servidores do GDF. Se você já tem um plano de saúde mas está insatisfeita ou não tem plano mas sonha em ter, me avise o melhor momento durante esta semana para que eu possa entrar em contato? Obrigado!'
-
-#mensagem para enviar se a pessoa for do sexo masculino
-messageMas = u'Tentei contactá-lo via telefone mas sem sucesso. Escrevo em nome do Instituto Assistencial dos Servidores do Distrito Federal (IGDF) e meu nome é Marlon. Trabalhamos com um Plano de Saúde exclusivo para Servidores do GDF. Se você já tem um plano de saúde mas está insatisfeito ou não tem plano mas sonha em ter, me avise o melhor momento durante esta semana para que eu possa entrar em contato? Obrigado!'
-
 #opening the workbook
 book = xlrd.open_workbook(nome_planilha)
 
@@ -78,7 +71,6 @@ browser.get(url)
 wait = raw_input('Digite algo assim que se conectar no whatsapp web: ')
 
 #wait 5 seconds after this.
-
 sleep(5)
 
 wbExistente = xlwt.Workbook()
@@ -105,8 +97,6 @@ for counter in range(sh.nrows):
 	if phone == "":
 		continue
 
-	sexo = sh.cell_value(counter, sexo_column)
-
 	try:
 		phone = treatPhone(phone)
 
@@ -120,19 +110,9 @@ for counter in range(sh.nrows):
 
 		browser.find_element_by_class_name("button").click()
 
-		sleep(10)
+		sleep(15)
 
-		if sexo == 'MAS':
-			print "masculino"
-			new_message = u'Olá ' + name + '. ' + messageMas + "\n"
-			text_box = browser.find_element_by_class_name("_2S1VP")
-			text_box.send_keys(new_message)
-
-		if sexo == 'FEM':
-			print "feminino"
-			new_message = u'Olá ' + name + '. ' + messageFem + "\n"
-			text_box = browser.find_element_by_class_name("_2S1VP")
-			text_box.send_keys(new_message)
+		text_box = browser.find_element_by_class_name("_2S1VP")
 
 		writeSheet(counter, sh, wsExistente, line_write1)
 
