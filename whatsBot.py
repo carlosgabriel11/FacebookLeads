@@ -11,8 +11,8 @@ from selenium.webdriver import Chrome
 from datetime import datetime
 import urllib
 
-phone_column = 24
-nome_column = 3
+phone_column = 29
+nome_column = 0
 line_write1 = 0
 line_write2 = 0
 
@@ -53,10 +53,22 @@ url = 'https://web.whatsapp.com'
 url_phone  = 'https://api.whatsapp.com/send?phone='
 
 #the name of the workbook
-nome_planilha = 'Leads.xlsx'
+nome_planilha = 'Leads_' + str(datetime.now().year) + '_'
+
+if datetime.now().month < 10:
+	nome_planilha = nome_planilha + '0' + str(datetime.now().month) + '_'
+else:
+	nome_planilha = nome_planilha + str(datetime.now().month) + '_'
+
+if datetime.now().day < 10:
+	nome_planilha = nome_planilha + '0' + str(datetime.now().day) + '.xlsx'
+else:
+	nome_planilha = nome_planilha + str(datetime.now().day) + '.xlsx'
 
 #opening the workbook
 book = xlrd.open_workbook(nome_planilha)
+
+chegou = raw_input('chegou')
 
 #opening the first sheet
 sh = book.sheet_by_index(0)
@@ -110,7 +122,7 @@ for counter in range(sh.nrows):
 
 		browser.find_element_by_class_name("button").click()
 
-		sleep(15)
+		sleep(20)
 
 		text_box = browser.find_element_by_class_name("_2S1VP")
 
