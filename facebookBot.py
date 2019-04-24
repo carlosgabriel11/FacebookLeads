@@ -17,6 +17,9 @@ def checkAnswer(contador, listOfNames):
 	if len(listOfNames) == 1:
 		return False
 
+	if contador == (len(listOfNames) - 1):
+		return False
+
 	if listOfNames[contador + 1] == u"DEPILAÇÃO LASER BR":
 		return True
 	else:
@@ -138,7 +141,7 @@ def answer(browser, auxName, auxText):
 
 def initFunction(url, url_inbox):
 	#open the google chrome
-	browser = webdriver.Firefox()
+	browser = webdriver.Chrome()
 
 	#open the whatsapp web
 	browser.get(url)
@@ -269,6 +272,23 @@ def checkToAnswer(browser):
 
 	return False
 
+def fillSheet(respostas_total):
+	book = xlrd.open_workbook("Respondido.xlsx")
+	sh = book.sheet_by_index(0)
+
+	rows = sh.nrows
+
+	del book
+
+	wb = openpyxl.load_workbook("Respondido.xlsx")
+
+	ws = wb.get_sheet_by_name("Plan1")
+
+	ws['A' + str(rows + 1)] = str(datetime.now().day) + "/" + str(datetime.now().month)
+	ws['B' + str(rows + 1)] = str(respostas_total)
+
+	wb.save("Respondido.xlsx")
+
 def main(erro_dropdown):
 	#the total number of answers given
 	respostas_total = 0
@@ -277,7 +297,7 @@ def main(erro_dropdown):
 	url = 'https://www.facebook.com/'
 
 	#the url of the inbox
-	url_inbox = 'https://business.facebook.com/depilacao.laser.br/inbox/?business_id=1163510226997646&mailbox_id=275176122991882&selected_item_id=100001503612000'
+	url_inbox = 'https://business.facebook.com/depilacao.laser.br/inbox/?business_id=1163510226997646&mailbox_id=275176122991882&selected_item_id=100001991850844'
 
 	#the number of dropdowns
 	N = 1
@@ -301,6 +321,6 @@ def main(erro_dropdown):
 
 		counter = counter + 1
 
-	print respostas_total
+	fillSheet(respostas_total)
 
 main(erro_dropdown)
