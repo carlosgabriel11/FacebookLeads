@@ -160,10 +160,11 @@ for counter in range(sh.nrows):
 				break
 			except:
 				try:
-					aux = browser.find_element_by_xpath("//div[@class='_1WZqU PNlAR']")
-					writeSheet(counter, sh, wsInexistente, line_write2)
-					line_write2 = line_write2 + 1
-					break
+					if browser.find_element_by_xpath("//div[@class='_3lLzD']").text.find(u'inválido') is not -1:
+						print "algo"
+						writeSheet(counter, sh, wsInexistente, line_write2)
+						line_write2 = line_write2 + 1
+						break
 				except Exception as e:
 					print e
 					sleep(5)
