@@ -319,6 +319,14 @@ def putSheet(number, cadastros, valores, precos):
 		valores[7] = valores[7].split(',')[0] + '.' + valores[7].split(',')[1]
 		ws['AL' + str(rows + 1)] = float(valores[7])
 
+		#colocar as informações da nona conta
+		ws['AO' + str(rows + 1)] = getDayYesterday() + "/" + getMonthYesterday()
+		if cadastros[8].find('.') is not -1:
+			cadastros[8] = cadastros[8].split('.')[0] + cadastros[8].split('.')[1]
+		ws['AP' + str(rows + 1)] = int(cadastros[8])
+		valores[8] = valores[8].split(',')[0] + '.' + valores[8].split(',')[1]
+		ws['AQ' + str(rows + 1)] = float(valores[8])
+
 		if precos[0].find('.') is not -1:
 			precos[0] = precos[0].split('.')[0] + precos[0].split('.')[1]
 		precos[0] = precos[0].split(',')[0] + '.' + precos[0].split(',')[1]
@@ -359,7 +367,12 @@ def putSheet(number, cadastros, valores, precos):
 		precos[7] = precos[7].split(',')[0] + '.' + precos[7].split(',')[1]
 		ws['AM' + str(rows + 1)] = float(precos[7])
 
-		ws['AR' + str(rows + 1)] = variacao
+		if precos[8].find('.') is not -1:
+			precos[8] = precos[8].split('.')[0] + precos[8].split('.')[1]
+		precos[8] = precos[8].split(',')[0] + '.' + precos[8].split(',')[1]
+		ws['AR' + str(rows + 1)] = float(precos[8])
+
+		ws['AW' + str(rows + 1)] = variacao
 
 		wb.save(nome_planilha)
 
@@ -429,6 +442,13 @@ def putSheet(number, cadastros, valores, precos):
 		valores[7] = valores[7].split(',')[0] + '.' + valores[7].split(',')[1]
 		ws['AL' + str(rows + 1)] = float(valores[7])
 
+		#colocar as informações da nona conta
+		ws['AO' + str(rows + 1)] = getDayBefore(number) + "/" + getMonthBefore(number)
+		if cadastros[8].find('.') is not -1:
+			cadastros[8] = cadastros[8].split('.')[0] + cadastros[8].split('.')[1]
+		ws['AP' + str(rows + 1)] = int(cadastros[8])
+		valores[8] = valores[8].split(',')[0] + '.' + valores[8].split(',')[1]
+		ws['AQ' + str(rows + 1)] = float(valores[8])
 
 		if precos[0].find('.') is not -1:
 			precos[0] = precos[0].split('.')[0] + precos[0].split('.')[1]
@@ -470,7 +490,12 @@ def putSheet(number, cadastros, valores, precos):
 		precos[7] = precos[7].split(',')[0] + '.' + precos[7].split(',')[1]
 		ws['AM' + str(rows + 1)] = float(precos[7])
 
-		ws['AR' + str(rows + 1)] = variacao
+		if precos[8].find('.') is not -1:
+			precos[8] = precos[8].split('.')[0] + precos[8].split('.')[1]
+		precos[8] = precos[8].split(',')[0] + '.' + precos[8].split(',')[1]
+		ws['AR' + str(rows + 1)] = float(precos[8])
+
+		ws['AW' + str(rows + 1)] = variacao
 
 		wb.save(nome_planilha)
 				
