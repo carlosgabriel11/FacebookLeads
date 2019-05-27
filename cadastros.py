@@ -28,9 +28,13 @@ adAccounts.append('101964773538755')
 adAccounts.append('294354761190803')
 #conta 8
 adAccounts.append('1249262278555646')
+#conta 9
+adAccounts.append('403669640487196')
 
 #nome da planilha
-nome_planilha = 'C:\\Users\\renderxp\\Dropbox\\_intermediarios\\Cadastros2.xlsx'
+nome_planilha = 'C:\\Users\\renderxp\\Dropbox\\_Relatorios\\_Consolidados\\Gastos.xlsx'
+#nome indicador
+nome_indicador = 'C:\\Users\\renderxp\\Dropbox\\_Relatorios\\_Consolidados\\Indicadores.xlsx'
 
 #função para pegar o mês de ontem
 def getMonthYesterday():
@@ -194,6 +198,35 @@ def getDayToday():
 	else:
 		return str(datetime.now().day)
 
+def getVariation(number):
+	book = xlrd.open_workbook(nome_indicador)
+
+
+	linha_aproveitamento = 3
+
+	coluna = 0
+
+	if number == 1:
+		sh = book.sheet_by_index(int(datetime.now().month) - 1)
+		for counter in range(31):
+			if sh.cell_value(0, counter) == int(datetime.now().day):
+				coluna = counter
+
+	else:
+		sh = book.sheet_by_index(int(getMonthBefore(number - 1)))
+		for counter in range(31):
+			if sh.cell_value(0, counter) == int(getDayBefore(number - 1)):
+				coluna = counter
+
+	while True:
+		if sh.cell_value(linha_aproveitamento, coluna) == "0":
+			coluna += 1
+			continue
+
+		print coluna
+		print sh.cell_value(linha_aproveitamento, coluna)
+		return float(sh.cell_value(linha_aproveitamento, coluna))
+
 def putSheet(number, cadastros, valores, precos):
 	#abrindo a planilha
 	book = xlrd.open_workbook(nome_planilha)
@@ -218,6 +251,8 @@ def putSheet(number, cadastros, valores, precos):
 
 	#abrir a planilha
 	ws = wb.get_sheet_by_name(wb.get_sheet_names()[int(getMonthBefore(number)) - 1])
+
+	variacao = getVariation(number)
 
 	if number == 1:
 		#colocar as informações da primeira conta
@@ -323,6 +358,8 @@ def putSheet(number, cadastros, valores, precos):
 			precos[7] = precos[7].split('.')[0] + precos[7].split('.')[1]
 		precos[7] = precos[7].split(',')[0] + '.' + precos[7].split(',')[1]
 		ws['AM' + str(rows + 1)] = float(precos[7])
+
+		ws['AR' + str(rows + 1)] = variacao
 
 		wb.save(nome_planilha)
 
@@ -432,6 +469,8 @@ def putSheet(number, cadastros, valores, precos):
 			precos[7] = precos[7].split('.')[0] + precos[7].split('.')[1]
 		precos[7] = precos[7].split(',')[0] + '.' + precos[7].split(',')[1]
 		ws['AM' + str(rows + 1)] = float(precos[7])
+
+		ws['AR' + str(rows + 1)] = variacao
 
 		wb.save(nome_planilha)
 				
