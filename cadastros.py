@@ -204,7 +204,7 @@ def getVariation(number):
 
 	linha_aproveitamento = 3
 
-	coluna = 0
+	coluna = 1
 
 	if number == 1:
 		sh = book.sheet_by_index(int(datetime.now().month) - 1)
@@ -245,6 +245,8 @@ def putSheet(number, cadastros, valores, precos):
 
 	#apagar o objeto planilha de leitura
 	del book
+
+	print len(cadastros)
 
 	#abrir a planilha no modo de escrita
 	wb = openpyxl.load_workbook(nome_planilha)
