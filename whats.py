@@ -90,7 +90,7 @@ book = xlrd.open_workbook(nome_planilha)
 sh = book.sheet_by_index(0)
 
 #open the google chrome
-browser = webdriver.Chrome()
+browser = webdriver.Firefox()
 
 #open the whatsapp web
 browser.get(url)
@@ -142,6 +142,14 @@ for counter in range(sh.nrows):
 
 		sleep(10)
 
+		if 'wrong' in browser.page_source:
+			counter -= 1
+			continue
+
+		if 'Server Error' in browser.page_source:
+			counter -= 1
+			continue
+
 		print "clicando"
 
 		browser.find_element_by_class_name("button").click()
@@ -150,7 +158,7 @@ for counter in range(sh.nrows):
 
 		while True:
 			try:
-				text_box = browser.find_element_by_class_name("_2S1VP")
+				text_box = browser.find_element_by_class_name("_3u328")
 				text_box.send_keys('\n')		
 
 				writeSheet(counter, sh, wsExistente, line_write1)
@@ -160,7 +168,7 @@ for counter in range(sh.nrows):
 				break
 			except:
 				try:
-					if browser.find_element_by_xpath("//div[@class='_3lLzD']").text.find(u'inválido') is not -1:
+					if u'inválido' in browser.page_source: #browser.find_element_by_xpath("//div[@class='_2Vo52']").text.find(u'inválido') is not -1:
 						print "algo"
 						writeSheet(counter, sh, wsInexistente, line_write2)
 						line_write2 = line_write2 + 1
