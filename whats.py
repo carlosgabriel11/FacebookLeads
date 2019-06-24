@@ -143,13 +143,12 @@ for counter in range(sh.nrows):
 		sleep(10)
 
 		if 'wrong' in browser.page_source:
-			counter -= 1
-			continue
+			browser.refresh()
+			sleep(7)
 
 		if 'Server Error' in browser.page_source:
-			counter -= 1
-			continue
-
+			browser.refresh()
+			sleep(7)
 		print "clicando"
 
 		browser.find_element_by_class_name("button").click()
@@ -178,7 +177,7 @@ for counter in range(sh.nrows):
 					sleep(5)
 					continue
 
-		sleep(10)
+		sleep(15)
 
 	except Exception as e:
 		print e
